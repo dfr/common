@@ -32,7 +32,9 @@ func TestCreateManifestList(t *testing.T) {
 	require.Error(t, err)
 	require.True(t, errors.Is(err, storage.ErrImageUnknown))
 
-	_, err = runtime.Pull(ctx, "busybox", config.PullPolicyMissing, nil)
+	pullOptions := &PullOptions{}
+	pullOptions.OS = "linux"
+	_, err = runtime.Pull(ctx, "busybox", config.PullPolicyMissing, pullOptions)
 	require.NoError(t, err)
 	_, err = runtime.LookupManifestList("busybox")
 	require.Error(t, err)

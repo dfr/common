@@ -17,11 +17,13 @@ func TestPush(t *testing.T) {
 	// Prefetch alpine.
 	pullOptions := &PullOptions{}
 	pullOptions.Writer = os.Stdout
+	pullOptions.OS = "linux"
 	_, err := runtime.Pull(ctx, "docker.io/library/alpine:latest", config.PullPolicyAlways, pullOptions)
 	require.NoError(t, err)
 
 	pushOptions := &PushOptions{}
 	pushOptions.Writer = os.Stdout
+	pushOptions.OS = "linux"
 
 	workdir, err := os.MkdirTemp("", "libimagepush")
 	require.NoError(t, err)
@@ -78,6 +80,7 @@ func TestPushOtherPlatform(t *testing.T) {
 	// Prefetch alpine.
 	pullOptions := &PullOptions{}
 	pullOptions.Writer = os.Stdout
+	pullOptions.OS = "linux"
 	pullOptions.Architecture = "arm64"
 	pulledImages, err := runtime.Pull(ctx, "docker.io/library/alpine:latest", config.PullPolicyAlways, pullOptions)
 	require.NoError(t, err)
@@ -89,6 +92,7 @@ func TestPushOtherPlatform(t *testing.T) {
 
 	pushOptions := &PushOptions{}
 	pushOptions.Writer = os.Stdout
+	pushOptions.OS = "linux"
 	tmp, err := os.CreateTemp("", "")
 	require.NoError(t, err)
 	tmp.Close()

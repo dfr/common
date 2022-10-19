@@ -18,6 +18,7 @@ func TestSave(t *testing.T) {
 	// Prefetch alpine, busybox.
 	pullOptions := &PullOptions{}
 	pullOptions.Writer = os.Stdout
+	pullOptions.OS = "linux"
 	_, err := runtime.Pull(ctx, "docker.io/library/alpine:latest", config.PullPolicyAlways, pullOptions)
 	require.NoError(t, err)
 	_, err = runtime.Pull(ctx, "docker.io/library/busybox:latest", config.PullPolicyAlways, pullOptions)

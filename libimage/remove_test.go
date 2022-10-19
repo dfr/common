@@ -20,6 +20,7 @@ func TestRemoveImages(t *testing.T) {
 
 	pullOptions := &PullOptions{}
 	pullOptions.Writer = os.Stdout
+	pullOptions.OS = "linux"
 	pulledImages, err := runtime.Pull(ctx, busyboxLatest, config.PullPolicyAlways, pullOptions)
 	require.NoError(t, err)
 	require.Len(t, pulledImages, 1)

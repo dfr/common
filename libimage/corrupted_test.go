@@ -19,6 +19,7 @@ func TestCorruptedLayers(t *testing.T) {
 	ctx := context.Background()
 	pullOptions := &PullOptions{}
 	pullOptions.Writer = os.Stdout
+	pullOptions.OS = "linux"
 
 	imageName := "quay.io/libpod/alpine_nginx:latest"
 

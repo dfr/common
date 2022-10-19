@@ -32,6 +32,7 @@ func TestImageFunctions(t *testing.T) {
 	// for some of the tests below.
 	pullOptions := &PullOptions{}
 	pullOptions.Writer = os.Stdout
+	pullOptions.OS = "linux"
 	pulledImages, err := runtime.Pull(ctx, busyboxLatest, config.PullPolicyAlways, pullOptions)
 	require.NoError(t, err)
 	require.Len(t, pulledImages, 1)
@@ -190,6 +191,7 @@ func TestInspectHealthcheck(t *testing.T) {
 	imageName := "quay.io/libpod/healthcheck:config-only"
 	pullOptions := &PullOptions{}
 	pullOptions.Writer = os.Stdout
+	pullOptions.OS = "linux"
 	pulledImages, err := runtime.Pull(ctx, imageName, config.PullPolicyAlways, pullOptions)
 	require.NoError(t, err)
 	require.Len(t, pulledImages, 1)
@@ -213,6 +215,7 @@ func TestTag(t *testing.T) {
 
 	pullOptions := &PullOptions{}
 	pullOptions.Writer = os.Stdout
+	pullOptions.OS = "linux"
 	pulledImages, err := runtime.Pull(ctx, busyboxLatest, config.PullPolicyMissing, pullOptions)
 	require.NoError(t, err)
 	require.Len(t, pulledImages, 1)
@@ -264,6 +267,7 @@ func TestUntag(t *testing.T) {
 
 	pullOptions := &PullOptions{}
 	pullOptions.Writer = os.Stdout
+	pullOptions.OS = "linux"
 	pulledImages, err := runtime.Pull(ctx, busyboxLatest, config.PullPolicyMissing, pullOptions)
 	require.NoError(t, err)
 	require.Len(t, pulledImages, 1)

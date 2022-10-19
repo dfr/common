@@ -20,6 +20,7 @@ func TestFilterReference(t *testing.T) {
 
 	pullOptions := &PullOptions{}
 	pullOptions.Writer = os.Stdout
+	pullOptions.OS = "linux"
 
 	pulledImages, err := runtime.Pull(ctx, busyboxLatest, config.PullPolicyMissing, pullOptions)
 	require.NoError(t, err)
@@ -122,6 +123,7 @@ func TestFilterManifest(t *testing.T) {
 
 	pullOptions := &PullOptions{}
 	pullOptions.Writer = os.Stdout
+	pullOptions.OS = "linux"
 
 	pulledImages, err := runtime.Pull(ctx, busyboxLatest, config.PullPolicyMissing, pullOptions)
 	require.NoError(t, err)
@@ -176,6 +178,7 @@ func TestFilterAfterSinceBeforeUntil(t *testing.T) {
 
 	pullOptions := &PullOptions{}
 	pullOptions.Writer = os.Stdout
+	pullOptions.OS = "linux"
 
 	pulledImages, err := runtime.Pull(ctx, testLatest, config.PullPolicyMissing, pullOptions)
 	require.NoError(t, err)
@@ -229,6 +232,7 @@ func TestFilterIdLabel(t *testing.T) {
 
 	pullOptions := &PullOptions{}
 	pullOptions.Writer = os.Stdout
+	pullOptions.OS = "linux"
 
 	pulledImages, err := runtime.Pull(ctx, testLatest, config.PullPolicyMissing, pullOptions)
 	require.NoError(t, err)

@@ -18,6 +18,7 @@ func TestPull(t *testing.T) {
 	ctx := context.Background()
 	pullOptions := &PullOptions{}
 	pullOptions.Writer = os.Stdout
+	pullOptions.OS = "linux"
 
 	// Make sure that parsing errors of the daemon transport are returned
 	// and that we do not fallthrough attempting to pull the specified
@@ -79,6 +80,9 @@ func TestPull(t *testing.T) {
 }
 
 func TestPullPlatforms(t *testing.T) {
+	if goruntime.GOOS != "linux" {
+		t.Skip("skipping on non-linux platform")
+	}
 	runtime, cleanup := testNewRuntime(t)
 	defer cleanup()
 	ctx := context.Background()
@@ -144,6 +148,7 @@ func TestPullPlatformsWithEmptyRegistriesConf(t *testing.T) {
 	ctx := context.Background()
 	pullOptions := &PullOptions{}
 	pullOptions.Writer = os.Stdout
+	pullOptions.OS = "linux"
 
 	localArch := goruntime.GOARCH
 	localOS := goruntime.GOOS
@@ -173,6 +178,7 @@ func TestPullPolicy(t *testing.T) {
 	defer cleanup()
 	ctx := context.Background()
 	pullOptions := &PullOptions{}
+	pullOptions.OS = "linux"
 
 	pulledImages, err := runtime.Pull(ctx, "alpine", config.PullPolicyNever, pullOptions)
 	require.Error(t, err, "Never pull different arch alpine")
@@ -194,6 +200,7 @@ func TestShortNameAndIDconflict(t *testing.T) {
 	ctx := context.Background()
 	pullOptions := &PullOptions{}
 	pullOptions.Writer = os.Stdout
+	pullOptions.OS = "linux"
 
 	busybox, err := runtime.Pull(ctx, "busybox", config.PullPolicyAlways, pullOptions)
 	require.NoError(t, err)
